@@ -1,0 +1,28 @@
+Dockerfile
+
+FROM tomcat:9.0
+RUN rm -rf /usr/local/tomcat/webapps/*
+COPY /target/sample.war /usr/local/tomcat/webapps/ROOT.war
+EXPOSE 8080
+
+--------------------------------------------------------------------------------
+web.xml
+
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-war-plugin</artifactId>
+    <configuration>
+        <webXml>src\main\webapp\index.html</webXml>
+    </configuration>
+</plugin>
+
+
+docker build -t sample-app .
+
+docker run -d -p 8095(give unused port number ):8080 sample-app;
+
+http://localhost:8095
+
+docker ps 
+docker stop 
+docker rm
